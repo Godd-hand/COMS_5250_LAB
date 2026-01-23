@@ -1,76 +1,91 @@
 # Python Lab Assignment
 
+# constant e
+e = 2.7182818284590451
+
+
 # 1. Factorial
-"""
-Aim: to calculate n!
-Attempt: use a simple for loop
-"""
 def factorial(n):
+    """Compute n! for a non-negative integer n.
+
+    Assumes `n` is an integer >= 0.
+    """
     s = 1
-    for k in range(1, n+1):
-        s = s*(k)
+    for k in range(1, n + 1):
+        s *= k
     return s
 
 
 # 2. Exponential Function
-"""
-Aim: to calculate the exponential function e^x.
+def exponential(x, tol=1e-12, max_iterations=1000):
+    """Compute e**x using a Taylor series.
 
-Class Notes:
+    We write x = x0 + z where x0 = int(round(x)). Then
+    e**x = e**x0 * sum_{n=0} (z**n / n!). Stop when |s| < tol
+    or after `max_iterations` terms.
+    """
+    if not isinstance(x, (int, float)):
+        raise TypeError("exponential() argument must be a number")
 
-We will store the value of e ≈ 2.7182818284590451.
-From x we find the nearest integer, let’s call it x_0:
-x_0 = int(round(x))
-We then compute the Taylor series of e^x about x = x_0.
-"""
-def exponential(x):
-    e = 2.7182818284590451
     x0 = int(round(x))
-    term = 1.0  # First term of the Taylor series
-    sum_exp = term  # Initialize sum of series with the first term
-    n = 1  # Counter for factorial in denominator
+    z = x - x0
 
-    while True:
-        term = term * (x - x0) / n  # Compute next term in series
-        sum_exp += term  # Add the new term to the sum
-        if abs(term) < 1e-10:  # Convergence check
+    s = 1.0
+    series_sum = s
+    for n in range(1, max_iterations + 1):
+        s = (z ** n) / factorial(n)
+        series_sum += s
+        if abs(s) < tol:
             break
-        n += 1
 
-    return sum_exp * (e ** x0)  # Scale by e^x0
-
+    # scale by e^x0 
+    return (e ** x0) * series_sum
 
 
 # 3. Natural Logarithm Function
-"""
-Aim: to calculate the natural logarithm ln(X)
-s = ln(x) 
-e^s = x
-f(s) = e^s - x
-"""
-def natural_log(x):
+def natural_log(x, tol=1e-12, max_iterations=100):
+    """Compute ln(x)
+
+    Solve f(s) = e^s - x = 0 with Newton updates.
+    """
+    if not isinstance(x, (int, float)):
+        raise TypeError("argument must be a number")
     if x <= 0:
-        raise ValueError("Input must be a positive number.")
-    
-    # Initial guess for s
-    s = x if x < 2 else 1.0
-    tolerance = 1e-10
-    max_iterations = 1000
-    iteration = 0
+        raise ValueError("input must be positive")
 
-    while iteration < max_iterations:
-        f_s = exponential(s) - x
-        f_prime_s = exponential(s)  # Derivative of e^s is e^s
+    # quick check
+    if x == 1.0:
+        return 0.0
 
-        # Newton's method update
-        s_new = s - f_s / f_prime_s
+    # initial guess
+    s = x
 
-        # Check for convergence
-        if abs(s_new - s) < tolerance:
-            return s_new
-        
-        s = s_new
-        iteration += 1
+    # Newton iteration: s_next = s - (e^s - x)/e^s = s - 1 + x * e^{-s}
+    for k in range(max_iterations):
+        s_next = s - 1 + x * exponential(-s)
+        if abs(s_next - s) < tol:
+            return s_next
+        s = s_next
 
-    raise RuntimeError("Failed to converge to a solution.")
+    raise RuntimeError("natural_log failed to converge")
+
+
+if __name__ == "__main__":
+    # demonstration 
+
+    print("factorial(5) =", factorial(5))
+    print("expected factorial(5) = 120")
+
+    for val in (1.0, 2.5, -1.5, 10.0):
+        try:
+            print(f"exponential({val}) =", exponential(val))
+            print(f"expected e**{val} =", (e ** val))
+        except Exception as err:
+            print("exponential error for", val, "->", err)
+
+    for val in (e, 10.0, 0.5):
+        try:
+            print(f"natural_log({val}) =", natural_log(val))
+        except Exception as err:
+            print("natural_log error for", val, "->", err)
 
