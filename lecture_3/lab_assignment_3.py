@@ -69,7 +69,7 @@ def perf_comparison():
     2. Slicing vs explicit copy of a list: A = L[:] vs B = list(L)
     3. In-place vs out-of-place modification: L.reverse() vs R = L[::-1]
     """
-    initial_N = 100
+    initial_N = 1000 # Using initial N of 1000
     # max_multiplier = 10
     operation_times = {
         "pop_end": [],
@@ -81,7 +81,7 @@ def perf_comparison():
     } # A dictionary to hold times for each operation
 
     #for multiplier in range(1, max_multiplier + 1):
-    for multiplier in [1, 2, 4, 8, 10]:    
+    for multiplier in [1, 2, 4, 8, 16]:    
         N = initial_N * multiplier
         L = [random.randint(1, 1000) for _ in range(N)]
 
