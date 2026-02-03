@@ -1,4 +1,4 @@
-# Develop an function GauuElimination(A,b) for solving linear systems Ax = b
+# Develop a function GaussElimination(A,b) for solving linear systems Ax = b
 # by Gaussian Elimination, with A and b as inputs and x as output.
 
 import numpy as np
