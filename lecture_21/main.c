@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
     {
         if (my_rank == 0) 
         {
-            printf("Error: Need at least 2 processors to pass the baton.\n");
+            printf("Error: Need at least 2 processors\n");
         }
         MPI_Finalize();
         return 1;
