@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
     }
 
     long long N = strtoll(argv[1], NULL, 10);
-    int thread_counts[] = {2, 4, 8, 16, 32};
+    int thread_counts[] = {2, 4, 8};
     
     FILE* fp = fopen("openmp_pi_results.txt", "w");
     if (!fp) 
