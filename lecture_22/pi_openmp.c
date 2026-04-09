@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
     }
 
     long long N = strtoll(argv[1], NULL, 10);
-    int thread_counts[] = {2, 4, 8};
+    int thread_counts[] = {2, 4, 8, 16, 32};
     
     FILE* fp = fopen("openmp_pi_results.txt", "w");
     if (!fp) 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     printf(" OpenMP Monte Carlo Pi (N = %lld)\n", N);
     printf("==========================================\n\n");
 
-    for (int t = 0; t < 3; t++) 
+    for (int t = 0; t < 5; t++) 
     {
         int num_threads = thread_counts[t];
         omp_set_num_threads(num_threads);
