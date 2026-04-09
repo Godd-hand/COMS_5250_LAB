@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     printf(" OpenMP Monte Carlo Pi (N = %lld)\n", N);
     printf("==========================================\n\n");
 
-    for (int t = 0; t < 5; t++) 
+    for (int t = 0; t < 3; t++) 
     {
         int num_threads = thread_counts[t];
         omp_set_num_threads(num_threads);

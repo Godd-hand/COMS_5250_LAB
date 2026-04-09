@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 
     unsigned int seed = 12345 + my_rank; // Unique seed for each process
 
-    double start_time;
+    double start_time = 0.0;;
     if (my_rank == 0) 
     {
         start_time = MPI_Wtime();

@@ -1,6 +1,6 @@
 CC_OMP = gcc
 CC_MPI = mpicc
-CFLAGS = -O3 -Wall -std=c99
+CFLAGS = -O3 -Wall -std=gnu99
 
 all: pi_openmp.exe pi_mpi.exe
 
