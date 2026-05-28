@@ -101,7 +101,7 @@ int main()
 
     // Spawn the Python visualization script
     printf("Spawning Python visualization script...\n");
-    system("/home/george/miniconda3/envs/agentic/bin/python plot.py");
+    system("python plot.py");
 
     return 0;
 }

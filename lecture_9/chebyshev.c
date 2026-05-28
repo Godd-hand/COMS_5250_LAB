@@ -59,7 +59,7 @@ int main()
 
     // Call Python to Plot
     printf(" Calling Python script to plot...\n");
-    system("/home/george/miniconda3/envs/agentic/bin/python PlotPoly.py");
+    system("python PlotPoly.py");
 
     return 0;
 }

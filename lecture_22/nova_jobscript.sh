@@ -4,8 +4,7 @@
 #SBATCH --ntasks-per-node=32   # Use 32 processor cores per node 
 #SBATCH --time=0-0:10:0   # Walltime limit (DD-HH:MM:SS)
 #SBATCH --qos=instruction   # Quality of service
-#SBATCH --job-name="monte_carlo_pi"   # Job name to display in squeue
-#SBATCH --mail-user=georgeth@iastate.edu   # Email address
+#SBATCH --job-name="monte_carlo_pi"   # Job name to display in squeue   # Email address
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --output="results_pi.out"   # Job standard output file
 #SBATCH --error="errors_pi.out"   # Job standard error file

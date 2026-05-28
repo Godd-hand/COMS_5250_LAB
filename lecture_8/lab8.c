@@ -82,7 +82,7 @@ int main()
     fclose(file);
 
     // Visualize the exp(x) function with the data in Python
-    system("/home/george/miniconda3/envs/agentic/bin/python3 plot.py exp_data.txt"); 
+    system("python3 plot.py exp_data.txt"); 
     return 0;
     
 }
